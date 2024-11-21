@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Viewer by Title and Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .title-section {
+            margin-bottom: 40px;
+        }
+        .title-name {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .video-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .video-item {
+            width: 30%;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+        .model-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Viewer by Title and Model</h1>
+    <div id="video-container"></div>
+
+    <script>
+        // Example data structure
+        const videoGroups = [
+        {
+            "title": "balloon3_the_balloons_drifting_higher_into_the_sky",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/balloon3_the_balloons_drifting_higher_into_the_sky_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/balloon3_the_balloons_drifting_higher_into_the_sky_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/balloon3_the_balloons_drifting_higher_into_the_sky_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "flower4_a_flower_opening",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/flower4_a_flower_opening_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/flower4_a_flower_opening_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/flower4_a_flower_opening_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "balance2_a_balance_swinging_left_and_right",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/balance2_a_balance_swinging_left_and_right_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/balance2_a_balance_swinging_left_and_right_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/balance2_a_balance_swinging_left_and_right_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "volcano4_a_volcano_erupting_and_smoking",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/volcano4_a_volcano_erupting_and_smoking_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/volcano4_a_volcano_erupting_and_smoking_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/volcano4_a_volcano_erupting_and_smoking_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "dog4_a_dog_standing_and_waving_tail",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/dog4_a_dog_standing_and_waving_tail_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/dog4_a_dog_standing_and_waving_tail_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/dog4_a_dog_standing_and_waving_tail_0.mp4"
+                },
+            ]
+        },
+        {
+            "title": "aerial_car2_a_car_moving_backward",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/aerial_car2_a_car_moving_backward_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/aerial_car2_a_car_moving_backward_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/aerial_car2_a_car_moving_backward_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "meadow_pig_a_pig_running_to_the_right_on_a_meadow",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tree3_leaves_from_the_tree_fall_to_the_ground",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tree3_leaves_from_the_tree_fall_to_the_ground_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tree3_leaves_from_the_tree_fall_to_the_ground_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tree3_leaves_from_the_tree_fall_to_the_ground_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "golf3_the_golf_ball_rolling_away_from_the_hole",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/golf3_the_golf_ball_rolling_away_from_the_hole_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/golf3_the_golf_ball_rolling_away_from_the_hole_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/golf3_the_golf_ball_rolling_away_from_the_hole_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "fish3_a_clownfish_swimming_forward",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/fish3_a_clownfish_swimming_forward_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/fish3_a_clownfish_swimming_forward_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/fish3_a_clownfish_swimming_forward_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "ducky1_a_yellow_rubber_duck_floats_on_the_water",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "balloon1_the_blue_balloon_dipping_down",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/balloon1_the_blue_balloon_dipping_down_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/balloon1_the_blue_balloon_dipping_down_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/balloon1_the_blue_balloon_dipping_down_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_face1_a_man_smiling",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_face1_a_man_smiling_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_face1_a_man_smiling_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_face1_a_man_smiling_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "balance3_a_balance_keeping_balanced",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/balance3_a_balance_keeping_balanced_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/balance3_a_balance_keeping_balanced_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/balance3_a_balance_keeping_balanced_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "aerial_car3_a_car_moving_backward",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/aerial_car3_a_car_moving_backward_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/aerial_car3_a_car_moving_backward_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/aerial_car3_a_car_moving_backward_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "traffic_light1_a_traffic_light_flashing",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/traffic_light1_a_traffic_light_flashing_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/traffic_light1_a_traffic_light_flashing_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/traffic_light1_a_traffic_light_flashing_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "meadow_bear_a_bear_running_to_the_left_on_a_meadow",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/meadow_bear_a_bear_running_to_the_left_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/meadow_bear_a_bear_running_to_the_left_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/meadow_bear_a_bear_running_to_the_left_on_a_meadow_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "bulbs4_light_bulbs_glowing",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/bulbs4_light_bulbs_glowing_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/bulbs4_light_bulbs_glowing_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/bulbs4_light_bulbs_glowing_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "horse4_a_horse_jumping",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/horse4_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/horse4_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/horse4_a_horse_jumping_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tide2_waves_advancing_towards_the_shore",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tide2_waves_advancing_towards_the_shore_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tide2_waves_advancing_towards_the_shore_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tide2_waves_advancing_towards_the_shore_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_walking3_a_cartoonstyle_person_jumping",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_walking3_a_cartoonstyle_person_jumping_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_walking3_a_cartoonstyle_person_jumping_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_walking3_a_cartoonstyle_person_jumping_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "horse1_a_horse_bending_down",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/horse1_a_horse_bending_down_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/horse1_a_horse_bending_down_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/horse1_a_horse_bending_down_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "horse3_a_horse_bending_down",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/horse3_a_horse_bending_down_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/horse3_a_horse_bending_down_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/horse3_a_horse_bending_down_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "aerial_car3_a_car_stopped_on_the_road",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/aerial_car3_a_car_stopped_on_the_road_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/aerial_car3_a_car_stopped_on_the_road_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/aerial_car3_a_car_stopped_on_the_road_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "aerial_car1_a_car_chaging_its_lane",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/aerial_car1_a_car_chaging_its_lane_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/aerial_car1_a_car_chaging_its_lane_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/aerial_car1_a_car_chaging_its_lane_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "volcano3_a_volcano_erupting_and_smoking",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/volcano3_a_volcano_erupting_and_smoking_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/volcano3_a_volcano_erupting_and_smoking_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/volcano3_a_volcano_erupting_and_smoking_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_face2_a_woman_smiling",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_face2_a_woman_smiling_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_face2_a_woman_smiling_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_face2_a_woman_smiling_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tide1_waves_advancing_towards_the_shore",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tide1_waves_advancing_towards_the_shore_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tide1_waves_advancing_towards_the_shore_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tide1_waves_advancing_towards_the_shore_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_walking3_a_cartoonstyle_person_walking",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_walking3_a_cartoonstyle_person_walking_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_walking3_a_cartoonstyle_person_walking_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_walking3_a_cartoonstyle_person_walking_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "candle3_the_flame_swaying_in_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/candle3_the_flame_swaying_in_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/candle3_the_flame_swaying_in_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/candle3_the_flame_swaying_in_winds_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tide4_waves_receding_back_into_the_ocean",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tide4_waves_receding_back_into_the_ocean_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tide4_waves_receding_back_into_the_ocean_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tide4_waves_receding_back_into_the_ocean_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_walking1_a_person_walking",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_walking1_a_person_walking_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_walking1_a_person_walking_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_walking1_a_person_walking_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "fish3_a_clownfish_turning_direction",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/fish3_a_clownfish_turning_direction_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/fish3_a_clownfish_turning_direction_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/fish3_a_clownfish_turning_direction_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "horse4_a_horse_turning_its_head_to_camera",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/horse4_a_horse_turning_its_head_to_camera_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/horse4_a_horse_turning_its_head_to_camera_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/horse4_a_horse_turning_its_head_to_camera_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "dog3_a_dog_barking",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/dog3_a_dog_barking_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/dog3_a_dog_barking_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/dog3_a_dog_barking_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "bird2_an_owl_flying_upward",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/bird2_an_owl_flying_upward_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/bird2_an_owl_flying_upward_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/bird2_an_owl_flying_upward_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "butterfly3_the_flower_and_surrounding_grass_swaying_by_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/butterfly3_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/butterfly3_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/butterfly3_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "horse2_a_horse_bending_down",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/horse2_a_horse_bending_down_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/horse2_a_horse_bending_down_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/horse2_a_horse_bending_down_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "fish1_a_shark_opening_its_mouth",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/fish1_a_shark_opening_its_mouth_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/fish1_a_shark_opening_its_mouth_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/fish1_a_shark_opening_its_mouth_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "flower4_a_flower_blowed_by_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/flower4_a_flower_blowed_by_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/flower4_a_flower_blowed_by_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/flower4_a_flower_blowed_by_winds_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_walking3_a_cartoonstyle_person_turning_right",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tree4_the_trees_branches_swaying",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tree4_the_trees_branches_swaying_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tree4_the_trees_branches_swaying_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tree4_the_trees_branches_swaying_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "golf2_the_golf_ball_rolling_into_the_hole",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/golf2_the_golf_ball_rolling_into_the_hole_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/golf2_the_golf_ball_rolling_into_the_hole_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/golf2_the_golf_ball_rolling_into_the_hole_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "balloon4_the_blue_balloon_dipping_down",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/balloon4_the_blue_balloon_dipping_down_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/balloon4_the_blue_balloon_dipping_down_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/balloon4_the_blue_balloon_dipping_down_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "bulbs1_light_bulbs_glowing",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/bulbs1_light_bulbs_glowing_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/bulbs1_light_bulbs_glowing_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/bulbs1_light_bulbs_glowing_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tree1_the_trees_branches_swaying",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tree1_the_trees_branches_swaying_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tree1_the_trees_branches_swaying_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tree1_the_trees_branches_swaying_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "flower1_a_flower_opening",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/flower1_a_flower_opening_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/flower1_a_flower_opening_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/flower1_a_flower_opening_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_face4_a_person_smiling",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_face4_a_person_smiling_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_face4_a_person_smiling_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_face4_a_person_smiling_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "meadow_bear_a_bear_jumping_high_on_a_meadow",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/meadow_bear_a_bear_jumping_high_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/meadow_bear_a_bear_jumping_high_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/meadow_bear_a_bear_jumping_high_on_a_meadow_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "person_face1_a_man_talking",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/person_face1_a_man_talking_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/person_face1_a_man_talking_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/person_face1_a_man_talking_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tree2_the_trees_branches_swaying",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tree2_the_trees_branches_swaying_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tree2_the_trees_branches_swaying_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tree2_the_trees_branches_swaying_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "flower1_a_flower_blowed_by_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/flower1_a_flower_blowed_by_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/flower1_a_flower_blowed_by_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/flower1_a_flower_blowed_by_winds_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "golf4_the_golf_ball_rolling_into_the_hole",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "candle2_the_candle_flame_becomes_bigger",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/candle2_the_candle_flame_becomes_bigger_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/candle2_the_candle_flame_becomes_bigger_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/candle2_the_candle_flame_becomes_bigger_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "aerial_car4_a_car_stopped_on_the_road",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/aerial_car4_a_car_stopped_on_the_road_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/aerial_car4_a_car_stopped_on_the_road_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/aerial_car4_a_car_stopped_on_the_road_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "meadow_pig_a_pig_jumping_high_on_a_meadow",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/meadow_pig_a_pig_jumping_high_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/meadow_pig_a_pig_jumping_high_on_a_meadow_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/meadow_pig_a_pig_jumping_high_on_a_meadow_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "horse2_a_horse_jumping",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/horse2_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/horse2_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/horse2_a_horse_jumping_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tide3_waves_advancing_towards_the_shore",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tide3_waves_advancing_towards_the_shore_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tide3_waves_advancing_towards_the_shore_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tide3_waves_advancing_towards_the_shore_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "butterfly2_the_flower_and_surrounding_grass_swaying_by_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "tree4_the_trees_shadow_shifts_as_the_sun_moves",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/tree4_the_trees_shadow_shifts_as_the_sun_moves_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/tree4_the_trees_shadow_shifts_as_the_sun_moves_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/tree4_the_trees_shadow_shifts_as_the_sun_moves_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "flower2_a_flower_blowed_by_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/flower2_a_flower_blowed_by_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/flower2_a_flower_blowed_by_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/flower2_a_flower_blowed_by_winds_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "volcano1_lightning_bolts_strike_hit_volcano_peak",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/volcano1_lightning_bolts_strike_hit_volcano_peak_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/volcano1_lightning_bolts_strike_hit_volcano_peak_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/volcano1_lightning_bolts_strike_hit_volcano_peak_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "balance2_a_balance_tilting_to_the_left",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/balance2_a_balance_tilting_to_the_left_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/balance2_a_balance_tilting_to_the_left_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/balance2_a_balance_tilting_to_the_left_0.mp4"
+                }
+            ]
+        },
+        {
+            "title": "candle2_the_flame_swaying_in_winds",
+            "videos": [
+                {
+                    "model": "motif",
+                    "src": "motif_mp4/candle2_the_flame_swaying_in_winds_0.mp4"
+                },
+                {
+                    "model": "dynamicrafter",
+                    "src": "dynamicrafter_mp4/candle2_the_flame_swaying_in_winds_0.mp4"
+                },
+                {
+                    "model": "cinemo",
+                    "src": "cinemo_mp4/candle2_the_flame_swaying_in_winds_0.mp4"
+                }
+            ]
+        }
+    ];
+
+        const videoContainer = document.getElementById('video-container');
+
+        videoGroups.forEach(group => {
+            // Create a section for each title
+            const titleSection = document.createElement('div');
+            titleSection.className = 'title-section';
+
+            const titleName = document.createElement('div');
+            titleName.className = 'title-name';
+            titleName.textContent = group.title;
+
+            titleSection.appendChild(titleName);
+
+            // Create a row for the three videos
+            const videoRow = document.createElement('div');
+            videoRow.className = 'video-row';
+
+            group.videos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+
+                const videoElement = document.createElement('video');
+                videoElement.src = video.src;
+                videoElement.controls = true;
+
+                const modelName = document.createElement('div');
+                modelName.className = 'model-name';
+                modelName.textContent = video.model;
+
+                videoItem.appendChild(videoElement);
+                videoItem.appendChild(modelName);
+                videoRow.appendChild(videoItem);
+            });
+
+            titleSection.appendChild(videoRow);
+            videoContainer.appendChild(titleSection);
+        });
+    </script>
+</body>
+</html>
