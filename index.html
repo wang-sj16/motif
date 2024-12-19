@@ -228,7 +228,10 @@
       <div class="container is-max-desktop">
         <div class="content">
         <h2 class="title">TI2V Bench</h2>
-        <p>We propose the token bottleneck model (TBM). Inspired by the concept bottleneck models (CBM), which achieve interpretable object classification by inspecting the weights of the learned linear classifier (left). Unlike CBM, Vamos does not require pre-defining a list of concepts. It directly works with tokenized text inputs. To provide input tokens to the reasoning model (an LLM), we leverage hard attention to generate binary rather than continuous weights (middle). The token bottleneck can be interpreted directly. It can also be intervened with human inputs (right), or augmented with residual visual information. </p>
+        <p>
+            <b>TI2V Bench</b> comprises text-image pairs from 22 diverse scenarios featuring a variety of objects and scenes. Each scenario includes 3 to 5 images with similar content presented in different styles, alongside 3 to 5 distinct prompts designed to animate these images and generate varied outputs. The benchmark includes a total of 320 image-text pairs, consisting of 88 unique images and 133 unique prompts. 
+            We also include challenging scenarios when there are multiple objects in the initial image for fine-grained control or the text prompt describes novel objects.
+        </p>
         <div class="container is-max-desktop">
           <div class="hero-body">
             <img src="static/figs/TI2V Bench.png" alt="TI2V Bench" weight="120%"/>
