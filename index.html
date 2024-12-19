@@ -187,7 +187,7 @@
         <p>Text-Image-to-Video (TI2V) generation aims to create a video based on an initial image and a text description. A common limitation of existing methods is their tendency to generate videos with limited and identical motions when given an image and multiple prompts.
             We hypothesize that this limitation arises from insufficient emphasis on motion patterns. As illustrated in Figure (a), in a video with a static background, 97% of pixels remain unchanged, with only 3% showing meaningful motion. 
             Such subtle motion is often overlooked in the standard TI2V training pipeline, where all regions are optimized equally in the L2 loss. This can result in "Condition Leakage," where the loss becomes low simply by copying the condition frames.
-            To address this, we propose <b>Moti</b>on <b>F</b>ocal loss (<b>MotiF</b>), inspired by the focal loss used in dense object detection. Specifically, we use optical flow to generate a motion heatmap that captures motion intensity and use it to assign loss weights, directing the model’s focus toward regions with significant motion.</p>
+            To address this, we propose <b>Moti</b>on <b>F</b>ocal loss (<b>MotiF</b>) to guide TI2V training to focus on regions with more motion via motion heatmap re-weighting. </p>
       <div class="container is-max-desktop">
         <div class="hero-body">
           <img src="static/figs/motivation.png" alt="Motivation" height="100%"/>
@@ -206,7 +206,10 @@
     <div class="container is-max-desktop">
       <div class="content">
       <h2 class="title">MotiF: Making Text Count in Image Animation with Motion Focal Loss</h2>
-      <p>We propose the token bottleneck model (TBM). Inspired by the concept bottleneck models (CBM), which achieve interpretable object classification by inspecting the weights of the learned linear classifier (left). Unlike CBM, Vamos does not require pre-defining a list of concepts. It directly works with tokenized text inputs. To provide input tokens to the reasoning model (an LLM), we leverage hard attention to generate binary rather than continuous weights (middle). The token bottleneck can be interpreted directly. It can also be intervened with human inputs (right), or augmented with residual visual information. </p>
+      <p>
+        Previous TI2V generation methods are mainly focused on deriving additional motion signals (motion score and/or motion mask) as inputs for the model to leverage implicitly. On the contrary, we focus on the learning objective and propose to weight the diffusion loss based on the motion intensity. Specifically, we first use optical flow to create a motion heatmap that represents the motion intensities of the video.
+        We then use the motion heatmap to assign loss weight for the video to focus on regions with more motion. Our method is simple, effective, and does not require additional inputs during inference. Moreover, MotiF is complementary to existing techniques.
+      </p>
       <div class="container is-max-desktop">
         <div class="hero-body">
           <img src="static/figs/model.png" alt="MotiF Model" weight="80%"/>
