@@ -81,14 +81,14 @@
     .video-container2 {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 1%;
     }
     .video-item2 {
         width: 24%; /* Ensure four videos fit in a row */
         text-align: center;
     }
     .video-name2 {
-        font-size: 1.3em;
+        font-size: 1.2em;
         margin-top: 10px;
         font-weight: bold;
     }
@@ -1356,10 +1356,8 @@
     <div class="hero-body">
         <div class="container is-max-desktop">
           <div class="content">
-          <h2 class="title">Failure Cases</h2>
-          <p>We compare Vamos with other state-of-the-art models on the four benchmarks: EgoSchema, NeXT-QA, IntentQA, and Ego4D LTA. Vamos achieves SoTA performance on all the four datasets.</p>
-        
-          <h2>Unnatural Motion</h2>
+          <h2 class="title">Common Failure Cases</h2>
+          <p style="font-size: 20px;"> <b>Unnatural Motion</b> </p>
           <div class="video-container2" id="video-container2-motion"></div>
       
           <script>
@@ -1401,7 +1399,7 @@
               });
           </script>
       
-          <h2>Fail to Follow Text Condition</h2>
+          <p style="font-size: 20px;"> <b>Fail to Follow Text Condition</b> </p>
           <div class="video-container2" id="video-container2-fail"></div>
       
           <script>
@@ -1444,7 +1442,8 @@
               });
           </script>
       
-          <h2>Novel Objects</h2>
+          <p style="font-size: 20px;"> <b>Novel Objects</b> </p>
+
           <div class="video-container2" id="video-container2-novel"></div>
       
           <script>
@@ -1486,7 +1485,7 @@
               });
           </script>
       
-          <h2>Multiple Objects</h2>
+          <p style="font-size: 20px;"> <b>Multiple Objects</b> </p>
           <div class="video-container2" id="video-container-multiple"></div>
       
           <script>
@@ -1540,13 +1539,8 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{wang2023vamos,
-        title={MotiF: Making Text Count in Image Animation with Motion Focal Loss}, 
-        author={Shijie Wang and Qi Zhao and Minh Quan Do and Nakul Agarwal and Kwonjoon Lee and Chen Sun},
-        year={2023},
-        eprint={2311.13627},
-        archivePrefix={arXiv},
-        primaryClass={cs.CV}
+      <pre><code>@misc{wang2024motif,
+        title={MotiF: Making Text Count in Image Animation with Motion Focal Loss}
   }</code></pre>
     </div>
 </section>
