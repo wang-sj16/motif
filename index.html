@@ -250,7 +250,9 @@
       <div class="container is-max-desktop">
         <div class="content">
         <h2 class="title">Human evaluation on TI2V Bench</h2>
-        <p>We propose the token bottleneck model (TBM). Inspired by the concept bottleneck models (CBM), which achieve interpretable object classification by inspecting the weights of the learned linear classifier (left). Unlike CBM, Vamos does not require pre-defining a list of concepts. It directly works with tokenized text inputs. To provide input tokens to the reasoning model (an LLM), we leverage hard attention to generate binary rather than continuous weights (middle). The token bottleneck can be interpreted directly. It can also be intervened with human inputs (right), or augmented with residual visual information. </p>
+        <p>
+            We conduct human evaluation to compare MotiF to nine open-sourced models on TI2V Bench. We achieved considerable improvements across the board with an average preference of 72%. Analysis of justification choices reveals that MotiF excels particularly in enhancing text alignment and generating accurate object motion.
+        </p>
         <div class="container is-max-desktop">
           <div class="hero-body">
             <img src="static/figs/results.png" alt="results" weight="120%"/>
@@ -266,9 +268,8 @@
     <div class="hero-body">
         <div class="container is-max-desktop">
           <div class="content">
-          <h2 class="title">Results Comparisons</h2>
-          <p>We compare Vamos with other state-of-the-art models on the four benchmarks: EgoSchema, NeXT-QA, IntentQA, and Ego4D LTA. Vamos achieves SoTA performance on all the four datasets.</p>
-            
+          <h2 class="title">Visualizations and Comparisons</h2>
+          <p>We visualize the results of MotiF and compare them with three leading models on the TI2V Bench dataset. The models from left to right are MotiF (ours), <a href="https://arxiv.org/abs/2310.12190" target="_blank">DynamiCrafter</a>, <a href="https://arxiv.org/abs/2407.15642" target="_blank">Cinemo</a>, and <a href="https://arxiv.org/abs/2406.15735" target="_blank">Cond-Leak</a>.</p>
           <div id="video-container"></div>
 
           <script>
@@ -1534,16 +1535,6 @@
 
 </section>
 
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title">Acknowledgements</h2>
-      <p>
-        This work is supported by Honda Research Institute USA and Samsung Advanced Institute of Technology. We would like to thank Karttikeya Mangalam, Raiymbek Akshulakov, and Shyamal Buch for their kind help with EgoSchema and ATP; Apoorv Khandelwal, Calvin Luo, David Isele, Songpo Li, and Tian Yun for their useful feedback and discussions. Our research was conducted using computational resources at the Center for Computation and Visualization at Brown University.
-      </p>
-</div>
-</div>
-</section>
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
