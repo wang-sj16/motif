@@ -184,11 +184,10 @@
     <div class="container is-max-desktop">
       <div class="content">
       <h2 class="title">Motivation</h2>
-      <p>We hypothesize that the model's difficulty in following motion-based instructions may stem from insufficient attention to motion patterns. As shown in Figure (a), in a video with a static background, 97% of the pixels remain unchanged over time, while only 3% exhibit meaningful motion. 
-        This subtle motion pattern might be neglected by the model especially considering that all regions are treated equally in the L2 loss.
-        Motivated by this, we introduce <b>Moti</b>on <b>F</b>ocal loss (<b>MotiF</b>), a term inspired from the focal loss in dense object detection.
-        Specifically, we first use optical flow to create a motion heatmap that represents the motion intensities of the video.
-        We then use the motion heatmap to assign loss weight for the video to focus on regions with more motion.</p>
+        <p>Text-Image-to-Video (TI2V) generation aims to create a video based on an initial image and a text description. A common limitation of existing methods is their tendency to generate videos with limited and identical motions when given an image and multiple prompts.
+            We hypothesize that this limitation arises from insufficient emphasis on motion patterns. As illustrated in Figure (a), in a video with a static background, 97% of pixels remain unchanged, with only 3% showing meaningful motion. 
+            Such subtle motion is often overlooked in the standard TI2V training pipeline, where all regions are optimized equally in the L2 loss. This can result in "Condition Leakage," where the loss becomes low simply by copying the condition frames.
+            To address this, we propose <b>Moti</b>on <b>F</b>ocal loss (<b>MotiF</b>), inspired by the focal loss used in dense object detection. Specifically, we use optical flow to generate a motion heatmap that captures motion intensity and use it to assign loss weights, directing the model’s focus toward regions with significant motion.</p>
       <div class="container is-max-desktop">
         <div class="hero-body">
           <img src="static/figs/motivation.png" alt="Motivation" height="100%"/>
