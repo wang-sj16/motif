@@ -65,10 +65,6 @@
         width: 30%;
         text-align: center;
     }
-    video {
-        width: 90%;
-        border: 1px solid #ccc;
-    }
     .model-name {
         font-size: 1.2em;
         margin-top: 10px;
@@ -149,6 +145,20 @@
                       <i class="fab fa-github"></i>
                     </span>
                     <span>Code</span>
+                    </a>
+                </span>
+                <!-- Interacting Gallery -->
+                <span class="link-block">
+                    <a href="./viz.html"
+                    target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="far fa-images"></i>
+                    </span>
+                    <span>Gallery</span>
+                    </a>
+                </span>
+
                   </a>
                 </span>
             </div>
@@ -184,7 +194,7 @@
     <div class="container is-max-desktop">
       <div class="content">
       <h2 class="title">Motivation</h2>
-        <p>Text-Image-to-Video (TI2V) generation aims to create a video based on an initial image and a text description. A common limitation of existing methods is their tendency to generate videos with limited and identical motions when given an image and multiple prompts.
+        <p>A common limitation of existing TI2V methods is their tendency to generate videos with limited and identical motions when given an image and multiple prompts.
             We hypothesize that this limitation arises from insufficient emphasis on motion patterns. As illustrated in Figure (a), in a video with a static background, 97% of pixels remain unchanged, with only 3% showing meaningful motion. 
             Such subtle motion is often overlooked in the standard TI2V training pipeline, where all regions are optimized equally in the L2 loss. This can result in "Condition Leakage," where the loss becomes low simply by copying the condition frames.
             To address this, we propose <b>Moti</b>on <b>F</b>ocal loss (<b>MotiF</b>) to guide TI2V training to focus on regions with more motion via motion heatmap re-weighting. </p>
@@ -207,8 +217,8 @@
       <div class="content">
       <h2 class="title">MotiF: Making Text Count in Image Animation with Motion Focal Loss</h2>
       <p>
-        Previous TI2V generation methods are mainly focused on deriving additional motion signals (motion score and/or motion mask) as inputs for the model to leverage implicitly. On the contrary, we focus on the learning objective and propose to weight the diffusion loss based on the motion intensity. Specifically, we first use optical flow to create a motion heatmap that represents the motion intensities of the video.
-        We then use the motion heatmap to assign loss weight for the video to focus on regions with more motion. Our method is simple, effective, and does not require additional inputs during inference. Moreover, MotiF is complementary to existing techniques.
+        Previous TI2V generation methods mainly focused on deriving additional motion signals (motion score and/or motion mask) as inputs for the model. On the contrary, we focus on the learning objective and propose to weight the diffusion loss based on the motion intensity.
+        During training, we first use optical flow to create a motion heatmap that represents the motion intensities of the video, then use the motion heatmap to assign loss weight for the video to focus on regions with more motion.
       </p>
       <div class="container is-max-desktop">
         <div class="hero-body">
@@ -264,6 +274,23 @@
   </section>
   <!--End Human Eval -->
 
+  <section class="hero is-small">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="content">
+          <h2 class="title">Animate an Image with Different Prompts</h2>
+
+
+            <video autoplay loop muted>
+                <source src="assets/motif_videos.mov" type="video/mp4">
+            </video>
+
+          </div>
+        </div>
+      </div>
+
+</section>
+
 <section class="hero is-small">
     <div class="hero-body">
         <div class="container is-max-desktop">
@@ -315,48 +342,6 @@
                   {
                       "model": "Cond-Leak",
                       "src": "assets/cond_leak/aerial_car2_a_car_moving_backward_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "A car moving backward.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/aerial_car3_a_car_moving_backward_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/aerial_car3_a_car_moving_backward_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/aerial_car3_a_car_moving_backward_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/aerial_car3_a_car_moving_backward_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "A car stopped on the road.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/aerial_car3_a_car_stopped_on_the_road_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/aerial_car3_a_car_stopped_on_the_road_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/aerial_car3_a_car_stopped_on_the_road_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/aerial_car3_a_car_stopped_on_the_road_0.mp4"
                   }
               ]
           },
@@ -424,48 +409,6 @@
               ]
           },
           {
-              "title": "A balance keeping balanced.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/balance3_a_balance_keeping_balanced_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/balance3_a_balance_keeping_balanced_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/balance3_a_balance_keeping_balanced_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/balance3_a_balance_keeping_balanced_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "The blue balloon dipping down.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/balloon1_the_blue_balloon_dipping_down_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/balloon1_the_blue_balloon_dipping_down_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/balloon1_the_blue_balloon_dipping_down_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/balloon1_the_blue_balloon_dipping_down_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "The balloons drifting higher into the sky.",
               "videos": [
                   {
@@ -512,27 +455,6 @@
               "videos": [
                   {
                       "model": "MotiF (Ours)",
-                      "src": "assets/motif/bulbs1_light_bulbs_glowing_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/bulbs1_light_bulbs_glowing_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/bulbs1_light_bulbs_glowing_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/bulbs1_light_bulbs_glowing_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "Light bulbs glowing.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
                       "src": "assets/motif/bulbs4_light_bulbs_glowing_0.mp4"
                   },
                   {
@@ -546,27 +468,6 @@
                   {
                       "model": "Cond-Leak",
                       "src": "assets/cond_leak/bulbs4_light_bulbs_glowing_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "The flower and surrounding grass swaying by winds.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/butterfly2_the_flower_and_surrounding_grass_swaying_by_winds_0.mp4"
                   }
               ]
           },
@@ -634,27 +535,6 @@
               ]
           },
           {
-              "title": "The flame swaying in winds.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/candle3_the_flame_swaying_in_winds_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/candle3_the_flame_swaying_in_winds_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/candle3_the_flame_swaying_in_winds_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/candle3_the_flame_swaying_in_winds_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "A dog standing and waving tail.",
               "videos": [
                   {
@@ -676,48 +556,6 @@
               ]
           },
           {
-              "title": "A yellow rubber duck floats on the water.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/ducky1_a_yellow_rubber_duck_floats_on_the_water_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "A shark opening its mouth.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/fish1_a_shark_opening_its_mouth_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/fish1_a_shark_opening_its_mouth_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/fish1_a_shark_opening_its_mouth_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/fish1_a_shark_opening_its_mouth_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "A clownfish turning direction.",
               "videos": [
                   {
@@ -735,48 +573,6 @@
                   {
                       "model": "Cond-Leak",
                       "src": "assets/cond_leak/fish3_a_clownfish_turning_direction_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "A flower opening.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/flower1_a_flower_opening_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/flower1_a_flower_opening_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/flower1_a_flower_opening_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/flower1_a_flower_opening_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "A flower blowed by winds.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/flower2_a_flower_blowed_by_winds_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/flower2_a_flower_blowed_by_winds_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/flower2_a_flower_blowed_by_winds_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/flower2_a_flower_blowed_by_winds_0.mp4"
                   }
               ]
           },
@@ -865,27 +661,6 @@
               ]
           },
           {
-              "title": "The golf ball rolling into the hole.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/golf4_the_golf_ball_rolling_into_the_hole_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "A horse jumping.",
               "videos": [
                   {
@@ -949,27 +724,6 @@
               ]
           },
           {
-              "title": "A pig running to the right on a meadow.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/meadow_pig_a_pig_running_to_the_right_on_a_meadow_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "A woman smiling.",
               "videos": [
                   {
@@ -1012,27 +766,6 @@
               ]
           },
           {
-              "title": "A cartoon-style person turning right.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/person_walking3_a_cartoonstyle_person_turning_right_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "A cartoon-style person walking.",
               "videos": [
                   {
@@ -1071,48 +804,6 @@
                   {
                       "model": "Cond-Leak",
                       "src": "assets/cond_leak/tide1_waves_advancing_towards_the_shore_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "Waves advancing towards the shore.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/tide2_waves_advancing_towards_the_shore_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/tide2_waves_advancing_towards_the_shore_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/tide2_waves_advancing_towards_the_shore_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/tide2_waves_advancing_towards_the_shore_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "Waves advancing towards the shore.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/tide3_waves_advancing_towards_the_shore_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/tide3_waves_advancing_towards_the_shore_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/tide3_waves_advancing_towards_the_shore_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/tide3_waves_advancing_towards_the_shore_0.mp4"
                   }
               ]
           },
@@ -1176,48 +867,6 @@
                   {
                       "model": "Cond-Leak",
                       "src": "assets/cond_leak/traffic_light1_a_traffic_light_turns_yellow_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "The tree's branches swaying.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/tree1_the_trees_branches_swaying_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/tree1_the_trees_branches_swaying_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/tree1_the_trees_branches_swaying_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/tree1_the_trees_branches_swaying_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "The tree's branches swaying.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/tree2_the_trees_branches_swaying_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/tree2_the_trees_branches_swaying_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/tree2_the_trees_branches_swaying_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/tree2_the_trees_branches_swaying_0.mp4"
                   }
               ]
           },
