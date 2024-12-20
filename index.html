@@ -347,6 +347,27 @@
               const videoGroups = 
           [
           {
+            "title": "A horse jumping.",
+            "videos": [
+                {
+                    "model": "MotiF (Ours)",
+                    "src": "assets/motif/horse4_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "DynamiCrafter",
+                    "src": "assets/dynamicrafter/horse4_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "Cinemo",
+                    "src": "assets/cinemo/horse4_a_horse_jumping_0.mp4"
+                },
+                {
+                    "model": "Cond-Leak",
+                    "src": "assets/cond_leak/horse4_a_horse_jumping_0.mp4"
+                }
+            ]
+        },
+          {
               "title": "A volcano erupting and smoking.",
               "videos": [
                   {
@@ -495,27 +516,6 @@
               ]
           },
           {
-              "title": "A balance tilting to the left.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/balance2_a_balance_tilting_to_the_left_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/balance2_a_balance_tilting_to_the_left_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/balance2_a_balance_tilting_to_the_left_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/balance2_a_balance_tilting_to_the_left_0.mp4"
-                  }
-              ]
-          },
-          {
               "title": "The blue balloon dipping down.",
               "videos": [
                   {
@@ -596,27 +596,6 @@
                   {
                       "model": "Cond-Leak",
                       "src": "assets/cond_leak/flower4_a_flower_opening_0.mp4"
-                  }
-              ]
-          },
-          {
-              "title": "A horse jumping.",
-              "videos": [
-                  {
-                      "model": "MotiF (Ours)",
-                      "src": "assets/motif/horse4_a_horse_jumping_0.mp4"
-                  },
-                  {
-                      "model": "DynamiCrafter",
-                      "src": "assets/dynamicrafter/horse4_a_horse_jumping_0.mp4"
-                  },
-                  {
-                      "model": "Cinemo",
-                      "src": "assets/cinemo/horse4_a_horse_jumping_0.mp4"
-                  },
-                  {
-                      "model": "Cond-Leak",
-                      "src": "assets/cond_leak/horse4_a_horse_jumping_0.mp4"
                   }
               ]
           },
@@ -718,7 +697,7 @@
                       modelName.textContent = video.model;
       
                       videoItem.appendChild(videoElement);
-                      // videoItem.appendChild(modelName);
+                      videoItem.appendChild(modelName);
                       videoRow.appendChild(videoItem);
                   });
       
