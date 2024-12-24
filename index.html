@@ -235,13 +235,13 @@
       <div class="content">
       <h2 class="title">Motivation</h2>
         <p>A common limitation of existing TI2V methods is their tendency to generate videos with limited and identical motions when given an image and multiple prompts.
-            We hypothesize that this limitation arises from insufficient emphasis on motion patterns. As illustrated in Figure (a), in a video with a static background, 97% of pixels remain unchanged, with only 3% showing meaningful motion. 
+            We hypothesize that this limitation arises from insufficient emphasis on motion patterns. In the example below, in a video with a static background, 97% of pixels remain unchanged, with only 3% showing meaningful motion. 
             Such subtle motion is often overlooked in the standard TI2V training pipeline, where all regions are optimized equally in the L2 loss. This can result in "Condition Leakage," where the loss becomes low simply by copying the condition frames.
             To address this, we propose <b>Moti</b>on <b>F</b>ocal loss (<b>MotiF</b>) to guide TI2V training to focus on regions with more motion via motion heatmap re-weighting. </p>
       <div class="container is-max-desktop">
-        <div class="hero-body">
-          <img src="static/figs/motivation.png" alt="Motivation" height="100%"/>
-        </div>
+        <video autoplay loop muted>
+          <source src="assets/teaser.mov" type="video/mp4">
+        </video>
       </div>
       </div>
     </div>
